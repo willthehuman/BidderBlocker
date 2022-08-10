@@ -1,11 +1,37 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "eBay/3.1131.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/eBay.Service.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/eBay.Service.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "eBay/3.1131.0": {
+      "sha512": "ZTh2i1vJpAD2OVaTSV1bcLtdLZz1+kfgY6sfeG4w84o+OkSavq0WyVWoy3p+SCqGwYzWSfAWMnpX0gJUrzSe/A==",
+      "type": "package",
+      "path": "ebay/3.1131.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ebay.3.1131.0.nupkg.sha512",
+        "ebay.nuspec",
+        "lib/net46/eBay.Service.dll",
+        "lib/netstandard2.0/eBay.Service.dll"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "eBay >= 3.1131.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\wperrier\\.nuget\\packages\\": {}
@@ -45,6 +71,12 @@
     "frameworks": {
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
+        "dependencies": {
+          "eBay": {
+            "target": "Package",
+            "version": "[3.1131.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
