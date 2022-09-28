@@ -96,8 +96,11 @@ def main():
                 # add the user to the list
                 users.append((username, feedback_score))
 
-    # Print all the usernames
-    print(users)
+    # Print all the usernames and their feedback score, separated by a new line
+    print('Found the following users: ')
+    for user in users:
+        if int(user[1]) >= int(the_feedback_score):
+            print(user[0] + ' ' + user[1])
 
     # Get all usernames of the users with feedback score less than the_feedback_score and add them to a list if they are not already in the list
     usernames = []
@@ -129,6 +132,12 @@ def main():
     # Remove duplicates in the usernames list
     usernames = list(dict.fromkeys(usernames))
 
+    # Print "The following users will be blocked: " and the usernames and their feedback score separated by new lines
+    print('The following users will be blocked: ')
+    for user in users:
+        if user[0] in usernames:
+            print(user[0] + ' ' + user[1])
+
     # Clear the textarea
     textarea.clear()
 
@@ -140,6 +149,12 @@ def main():
 
     # Click the submit button
     submit_button.click()
+
+    # Print All Done!
+    print('All Done!')
+
+    # Close the browser
+    driver.quit()
 
 # get all the items' hrefs and return them
 def get_items_href(driver):
