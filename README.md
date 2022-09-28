@@ -7,3 +7,8 @@ An automated ebay tool to block unwanted bidders from bidding
 2. Run azb.py from the terminal (ex.: ```python ./azb.py willthehuman@email.com hunter2 10```)
 - (Usage: ```azb.py [username/email] [password] [minimum feedback score]```)
 3. Fill the recaptchas when prompted to
+
+# Upcoming features
+- Block bidders based on their account creation date
+- Block bidders based on their most recent feedback received as a buyer
+- A graphical interface
