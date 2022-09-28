@@ -90,13 +90,26 @@ def main():
                 # parse the feedback score in between paranthesis
                 feedback_score = feedback_score[feedback_score.find('(')+1:feedback_score.find(')')]
 
-                # add the user to the list
-                users.append((username, feedback_score))
+                # if the feedback score is not empty
+                if feedback_score:
+                    # if the feedback score is less than minimum feedback score
+                    if int(feedback_score) < int(the_feedback_score):
+                        # add the user to the list
+                        users.append((username, feedback_score))
 
-    # Print all the usernames and their feedback score, separated by a new line
+    # remove duplicates
+    users = list(set(users))
+
+    # if there are no users in the usernames list, print a message and exit
+    if len(users) == 0:
+        print('No users with feedback score less than ' + the_feedback_score)
+        sys.exit(0)
+
+    # Print 'Found the following users: ' followed by the users and their feedback score
     print('Found the following users: ')
     for user in users:
-        print(user[0] + ', ' + user[1])
+        if int(user[1]) < int(the_feedback_score):
+            print(user[0] + ', ' + user[1])
 
     # Get all usernames of the users with feedback score less than the_feedback_score and add them to a list if they are not already in the list
     usernames = []
@@ -104,11 +117,6 @@ def main():
         if int(user[1]) < int(the_feedback_score):
             if user[0] not in usernames:
                 usernames.append(user[0])
-
-    # if there are no users in the usernames list, print a message and exit
-    if len(usernames) == 0:
-        print('No users with feedback score less than ' + the_feedback_score)
-        sys.exit(0)
 
     # Go to https://www.ebay.com/bmgt/BuyerBlock?
     driver.get('https://www.ebay.com/bmgt/BuyerBlock?')
@@ -125,18 +133,19 @@ def main():
     # Get the textarea element
     textarea = driver.find_element(By.ID, 'app-page-form-0')
 
+    # Print "The following users will be added to the blocked bidders list: " and the unique usernames separated by new lines
+    print('The following users will be added to the blocked bidders list: ')
+    for username in usernames:
+        print(username)
+
     # Get every username separated by commas in the textarea and add them to the usernames list
     for username in textarea.text.split(','):
         if username not in usernames:
             usernames.append(username)
 
-    # Remove duplicates in the usernames list
+    # Remove duplicates in the usernames list and remove any white spaces
     usernames = list(dict.fromkeys(usernames))
-
-    # Print "The following users will be added to the blocked bidders list: " and the unique usernames separated by new lines
-    print('The following users will be added to the blocked bidders list: ')
-    for username in usernames:
-        print(username)
+    usernames = [username.strip() for username in usernames]
 
     # Clear the textarea
     textarea.clear()
