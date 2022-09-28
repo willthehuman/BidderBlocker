@@ -105,6 +105,11 @@ def main():
             if user[0] not in usernames:
                 usernames.append(user[0])
 
+    # if there are no users in the usernames list, print a message and exit
+    if len(usernames) == 0:
+        print('No users with feedback score less than ' + the_feedback_score)
+        sys.exit(0)
+
     # Go to https://www.ebay.com/bmgt/BuyerBlock?
     driver.get('https://www.ebay.com/bmgt/BuyerBlock?')
 
@@ -128,11 +133,10 @@ def main():
     # Remove duplicates in the usernames list
     usernames = list(dict.fromkeys(usernames))
 
-    # Print "The following users will be blocked: " and the unique usernames and their feedback score separated by new lines
+    # Print "The following users will be added to the blocked bidders list: " and the unique usernames separated by new lines
     print('The following users will be added to the blocked bidders list: ')
-    for user in users:
-        if user[0] in usernames:
-            print(user[0] + ', ' + user[1])
+    for username in usernames:
+        print(username)
 
     # Clear the textarea
     textarea.clear()
