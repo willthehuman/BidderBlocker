@@ -82,7 +82,14 @@ def main():
 
         # Add unique users by username and their feedback score to the list
         for href in hrefs:
-            username = href.text.split('\\n')[-1]
+            # if href.text contains a space, split on the space and get the second part
+            if ' ' in href.text:
+                # if it contains a \n, split on the \n and get the second part
+                if '\n' in href.text:
+                    username = href.text.split('\n')[1]
+            else:
+                username = href.text
+
             if username not in users:
                 # get the feedback score and the href's sibling element
                 feedback_score = href.find_element(By.XPATH, 'following-sibling::span').text
@@ -117,6 +124,8 @@ def main():
         if int(user[1]) < int(the_feedback_score):
             if user[0] not in usernames:
                 usernames.append(user[0])
+
+    # Remove usernames 
 
     # Go to https://www.ebay.com/bmgt/BuyerBlock?
     driver.get('https://www.ebay.com/bmgt/BuyerBlock?')
