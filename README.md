@@ -3,6 +3,8 @@ An automated ebay tool to block unwanted bidders from bidding
 
 # How to use
 0. Make sure you have Python installed
+0.2. Run ```pip install selenium``` and ```pip install webdriver-manager```
+0.3 Make sure to have Chrome installed
 1. Download the file from the releases
 2. Run azb.py from the terminal (ex.: ```python ./azb.py willthehuman@email.com hunter2 10```)
 - (Usage: ```azb.py [username/email] [password] [minimum feedback score]```)
